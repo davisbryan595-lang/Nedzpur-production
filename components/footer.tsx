@@ -10,7 +10,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-04%20at%2012.38.13%20AM-ZyZcFH86FFI3j9X4TQwmYcOeOFx6ia.jpeg"
+              src="/nedzlogo.png"
               alt="Nedzpur Production"
               width={150}
               height={50}

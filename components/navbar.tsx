@@ -39,7 +39,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="#home" className="flex items-center space-x-3">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-04%20at%2012.38.13%20AM-ZyZcFH86FFI3j9X4TQwmYcOeOFx6ia.jpeg"
+              src="/nedzlogo.png"
               alt="Nedzpur Production Logo"
               width={120}
               height={40}
