@@ -60,8 +60,7 @@ export default function Hero() {
           transition={{ duration: 0.6 }}
           className="inline-flex items-center space-x-2 glass px-4 py-2 rounded-full mb-8"
         >
-          <MapPin className="h-4 w-4 text-[#FFA500]" />
-          <span className="text-sm font-medium">Suffolk County, Long Island</span>
+          
         </motion.div>
 
         {/* Main Headline */}
