@@ -1,182 +1,154 @@
-import Link from "next/link"
-import Image from "next/image"
-import { Facebook, Twitter, Linkedin, Instagram, Github } from "lucide-react"
+"use client"
 
-export default function Footer() {
+import { useRef } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { Button } from "@/components/ui/button"
+import { ArrowRight, MapPin } from "lucide-react"
+
+export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  })
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0])
+
   return (
-    <footer className="bg-muted/50 border-t">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          {/* Brand */}
-          <div>
-            <Image
-              src="/nedzlogo.png"
-              alt="Nedzpur Production"
-              width={150}
-              height={50}
-              className="h-12 w-auto mb-4"
-            />
-            <p className="text-sm text-muted-foreground mb-4 text-balance">
-              Visualization to the horizon. Full-stack IT services in Suffolk County, Long Island.
-            </p>
-            <div className="flex gap-4">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-[#FFA500] transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-[#FFA500] transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-[#FFA500] transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-[#FFA500] transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-[#FFA500] transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-            </div>
-          </div>
+    <section
+      id="home"
+      ref={containerRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 md:pt-32"
+    >
+      {/* Background Video/Image with Parallax */}
+      <motion.div style={{ y }} className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#ADD8E6]/20 via-transparent to-[#FFD700]/12 z-10" />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+          poster="/modern-tech-dashboard-animation.jpg"
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/40 z-10" />
+      </motion.div>
 
-          {/* Services */}
-          <div>
-            <h3 className="font-semibold mb-4">Services</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="#services" className="hover:text-[#FFA500] transition-colors">
-                  Frontend Development
-                </Link>
-              </li>
-              <li>
-                <Link href="#services" className="hover:text-[#FFA500] transition-colors">
-                  Backend Development
-                </Link>
-              </li>
-              <li>
-                <Link href="#services" className="hover:text-[#FFA500] transition-colors">
-                  IT Engineering
-                </Link>
-              </li>
-              <li>
-                <Link href="#services" className="hover:text-[#FFA500] transition-colors">
-                  Automation
-                </Link>
-              </li>
-              <li>
-                <Link href="#services" className="hover:text-[#FFA500] transition-colors">
-                  Data Analytics
-                </Link>
-              </li>
-              <li>
-                <Link href="#services" className="hover:text-[#FFA500] transition-colors">
-                  Software Testing
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="#home" className="hover:text-[#FFA500] transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="#about" className="hover:text-[#FFA500] transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="#gallery" className="hover:text-[#FFA500] transition-colors">
-                  Portfolio
-                </Link>
-              </li>
-              <li>
-                <Link href="#testimonials" className="hover:text-[#FFA500] transition-colors">
-                  Testimonials
-                </Link>
-              </li>
-              <li>
-                <Link href="#pricing" className="hover:text-[#FFA500] transition-colors">
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link href="#contact" className="hover:text-[#FFA500] transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h3 className="font-semibold mb-4">Contact</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Suffolk County</li>
-              <li>Long Island, NY 11733</li>
-              <li>
-                <a href="tel:+15550123" className="hover:text-[#FFA500] transition-colors">
-                  +1 (555) 012-3456
-                </a>
-              </li>
-              <li>
-                <a href="mailto:contact@nedzpur.com" className="hover:text-[#FFA500] transition-colors">
-                  contact@nedzpur.com
-                </a>
-              </li>
-              <li className="pt-2">
-                <strong>Hours:</strong>
-                <br />
-                Mon-Sat: 8:00 AM - 6:00 PM
-                <br />
-                Sunday: By appointment
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>© 2025 Nedzpur Production. All rights reserved.</p>
-          <p className="text-balance text-center">
-            Serving Suffolk County & Nassau County — Mobile consultations available
-          </p>
-        </div>
+      {/* Floating Shapes */}
+      <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-[#FFD700]/10 blur-3xl"
+          animate={{ y: [0, -30, 0], x: [0, 20, 0] }}
+          transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-[#90EE90]/10 blur-3xl"
+          animate={{ y: [0, 30, 0], x: [0, -20, 0] }}
+          transition={{ duration: 10, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+        />
       </div>
-    </footer>
+
+      {/* Content */}
+      <motion.div style={{ opacity }} className="relative z-20 container mx-auto px-4 text-center">
+        {/* Location Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center space-x-2 glass px-4 py-2 rounded-full mb-8"
+        >
+          <MapPin className="h-4 w-4 text-[#FFA500]" />
+          <span className="text-sm font-medium">Suffolk County, Long Island</span>
+        </motion.div>
+
+        {/* Main Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-balance leading-tight"
+        >
+          <span className="gradient-text">Visualization</span>
+          <br />
+          <span className="text-white">to the horizon</span>
+        </motion.h1>
+
+        {/* Subheadline */}
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto text-balance"
+        >
+          Full-stack IT services — Backend, Frontend, Data, Automation.
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          <Button
+            size="lg"
+            className="bg-[#FFA500] hover:bg-[#FF8C00] text-white text-lg px-8 py-6 animate-pulse-glow"
+            asChild
+          >
+            <a href="#contact">
+              Get a Quote
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </a>
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="glass border-white/30 text-white hover:bg-white/10 text-lg px-8 py-6 bg-transparent"
+            asChild
+          >
+            <a href="#services">View Services</a>
+          </Button>
+        </motion.div>
+
+        {/* Stats Counter */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
+        >
+          {[
+            { number: "500+", label: "Projects Completed" },
+            { number: "98%", label: "Client Satisfaction" },
+            { number: "50+", label: "Team Members" },
+            { number: "10+", label: "Years Experience" },
+          ].map((stat, index) => (
+            <div key={index} className="glass p-6 rounded-2xl">
+              <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">{stat.number}</div>
+              <div className="text-sm text-white/80">{stat.label}</div>
+            </div>
+          ))}
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+          className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2"
+        >
+          <motion.div className="w-1.5 h-1.5 bg-white rounded-full" />
+        </motion.div>
+      </motion.div>
+    </section>
   )
 }
