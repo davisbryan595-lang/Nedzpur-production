@@ -19,7 +19,7 @@ export default function Hero() {
     <section
       id="home"
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 md:pt-32"
     >
       {/* Background Video/Image with Parallax */}
       <motion.div style={{ y }} className="absolute inset-0 z-0">
@@ -41,27 +41,13 @@ export default function Hero() {
       <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-[#FFD700]/10 blur-3xl"
-          animate={{
-            y: [0, -30, 0],
-            x: [0, 20, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
+          animate={{ y: [0, -30, 0], x: [0, 20, 0] }}
+          transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-[#90EE90]/10 blur-3xl"
-          animate={{
-            y: [0, 30, 0],
-            x: [0, -20, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
+          animate={{ y: [0, 30, 0], x: [0, -20, 0] }}
+          transition={{ duration: 10, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
         />
       </div>
 
@@ -83,7 +69,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-balance"
+          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-balance leading-tight"
         >
           <span className="gradient-text">Visualization</span>
           <br />
@@ -132,7 +118,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
+          className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
         >
           {[
             { number: "500+", label: "Projects Completed" },
