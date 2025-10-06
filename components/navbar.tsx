@@ -19,7 +19,9 @@ const navLinks = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [scrolledPastHero, setScrolledPastHero] = useState(false)
 
+  // Detect general scroll for background blur
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
@@ -28,10 +30,28 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // Detect when hero section leaves viewport
+  useEffect(() => {
+    const hero = document.querySelector("#home")
+    if (!hero) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setScrolledPastHero(!entry.isIntersecting)
+      },
+      { threshold: 0.1 }
+    )
+
+    observer.observe(hero)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glass shadow-lg backdrop-blur-md bg-black/60" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled
+          ? "glass shadow-lg backdrop-blur-md bg-white/80 border-b border-gray-200"
+          : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -50,15 +70,19 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8 transition-colors duration-300">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="relative text-sm font-semibold text-white transition-all duration-300 
-                  hover:text-[#FFD700] after:absolute after:left-0 after:-bottom-1 
-                  after:h-[2px] after:w-0 after:bg-[#FFD700] after:transition-all after:duration-300 
-                  hover:after:w-full"
+                className={`relative text-sm font-semibold transition-all duration-300 
+                  after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:transition-all after:duration-300 
+                  hover:after:w-full
+                  ${
+                    scrolledPastHero
+                      ? "text-black hover:text-[#FF8C00] after:bg-[#FF8C00]"
+                      : "text-white hover:text-[#FFD700] after:bg-[#FFD700]"
+                  }`}
               >
                 {link.label}
               </Link>
@@ -69,7 +93,11 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center space-x-4">
             <Button
               asChild
-              className="bg-[#FFA500] hover:bg-[#FF8C00] text-white animate-pulse-glow shadow-[0_0_12px_rgba(255,165,0,0.6)]"
+              className={`transition-all duration-300 shadow-md ${
+                scrolledPastHero
+                  ? "bg-[#FFA500] hover:bg-[#FF8C00] text-white"
+                  : "bg-[#FFA500] hover:bg-[#FF8C00] text-white animate-pulse-glow shadow-[0_0_12px_rgba(255,165,0,0.6)]"
+              }`}
             >
               <a href="tel:+15550123">
                 <Phone className="mr-2 h-4 w-4" />
@@ -80,7 +108,9 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-white"
+            className={`lg:hidden p-2 transition-colors ${
+              scrolledPastHero ? "text-black" : "text-white"
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -91,19 +121,32 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden glass border-t border-white/20 bg-black/70 backdrop-blur-md">
+        <div
+          className={`lg:hidden border-t backdrop-blur-md transition-all duration-300 ${
+            scrolledPastHero ? "bg-white/90 border-gray-200" : "bg-black/70 border-white/20"
+          }`}
+        >
           <div className="container mx-auto px-4 py-4 space-y-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block py-2 text-sm font-medium text-white hover:text-[#FFD700] transition-colors"
+                className={`block py-2 text-sm font-medium transition-colors ${
+                  scrolledPastHero ? "text-black hover:text-[#FF8C00]" : "text-white hover:text-[#FFD700]"
+                }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
-            <Button asChild className="w-full bg-[#FFA500] hover:bg-[#FF8C00] text-white">
+            <Button
+              asChild
+              className={`w-full transition-colors ${
+                scrolledPastHero
+                  ? "bg-[#FFA500] hover:bg-[#FF8C00] text-white"
+                  : "bg-[#FFA500] hover:bg-[#FF8C00] text-white"
+              }`}
+            >
               <a href="tel:+15550123">
                 <Phone className="mr-2 h-4 w-4" />
                 Call Now
