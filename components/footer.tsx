@@ -127,7 +127,7 @@ export default function Footer() {
               <li>Long Island, NY 11733</li>
               <li>
                 <a
-                  href="tel:+15550123"
+                  href="tel:+1(631)664-6632"
                   className="hover:text-[#FFA500] transition-colors duration-300"
                 >
                   +1 (631) 664-6632
