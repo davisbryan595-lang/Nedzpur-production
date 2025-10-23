@@ -147,7 +147,7 @@ export default function Navbar() {
                   : "bg-[#FFA500] hover:bg-[#FF8C00] text-white"
               }`}
             >
-              <a href="tel:+15550123">
+              <a href="tel:+16316646632">
                 <Phone className="mr-2 h-4 w-4" />
                 Call Now
               </a>
