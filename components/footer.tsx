@@ -130,7 +130,7 @@ export default function Footer() {
                   href="tel:+15550123"
                   className="hover:text-[#FFA500] transition-colors duration-300"
                 >
-                  +1 (555) 012-3456
+                  +1 (631) 664-6632
                 </a>
               </li>
               <li>
