@@ -103,7 +103,7 @@ export default function Contact() {
               </CardHeader>
               <CardContent>
                 <a href="tel:+15550123" className="text-lg hover:text-[#FFA500] transition-colors">
-                  +1 (555) 012-3456
+                  +1 (631) 664-6632
                 </a>
               </CardContent>
             </Card>
