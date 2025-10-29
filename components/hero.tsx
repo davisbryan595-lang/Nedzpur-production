@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, MapPin } from "lucide-react"
@@ -14,6 +14,14 @@ export default function Hero() {
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0])
+  const [showVideo, setShowVideo] = useState(false)
+  useEffect(() => {
+    fetch('/hero-video.mp4', { method: 'HEAD' })
+      .then((res) => {
+        if (res.ok) setShowVideo(true)
+      })
+      .catch(() => {})
+  }, [])
 
   return (
     <section
@@ -24,16 +32,25 @@ export default function Hero() {
       {/* Background Video/Image with Parallax */}
       <motion.div style={{ y }} className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-[#ADD8E6]/20 via-transparent to-[#FFD700]/12 z-10" />
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-          poster="/modern-tech-dashboard-animation.jpg"
-        >
-          <source src="/hero-video.mp4" type="video/mp4" />
-        </video>
+        {showVideo ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            onError={() => setShowVideo(false)}
+            className="w-full h-full object-cover"
+            poster="/modern-tech-dashboard-animation.jpg"
+          >
+            <source src="/hero-video.mp4" type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            src="/modern-tech-dashboard-animation.jpg"
+            alt="Technology dashboard background"
+            className="w-full h-full object-cover"
+          />
+        )}
         <div className="absolute inset-0 bg-black/40 z-10" />
       </motion.div>
 
